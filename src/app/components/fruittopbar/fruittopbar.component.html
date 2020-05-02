@@ -1,0 +1,312 @@
+<header class="header_wrap dark_skin main_menu_uppercase">
+	<div class="top-header bg_gray">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-md-7">
+              <ul class="contact_detail border_list list_none text-center text-md-left">
+                <li>
+<!-- 
+                  <a href="tel:584147529202" style="cursor: pointer;">
+                            <span class="ti-mobile"></span>
+                            <p></p>
+                            </a> -->
+                  <a href="tel:584147529202" style="cursor: pointer;"><i class="ti-mobile"></i> <span>(414) 752 9202</span></a>
+                </li>
+                <li>
+                   <a href="mailto:soporte@frutme.com">soporte@frutme.com</a>
+                  <!-- <a ><i class="ti-email"></i> <span>soporte@frutme.com</span></a> -->
+                </li>
+              </ul>
+            </div>
+            <div class="col-md-5" *ngIf="this._uw.info[0]">
+              <ul class="header_list border_list list_none header_dropdown text-center text-md-right" *ngIf="this._uw.info[0]">
+                <li>Aceptamos</li>
+                <li>
+                  <div class="custome_dropdown">
+                    <ul>
+                      <li>
+                        <a data-title="Aceptamos PayPal">
+                          <img src="assets/assetsfruit/images/paypal.png" alt="paypal" />
+                        </a>
+                      </li>                                      
+                    </ul>
+                  </div>
+                </li>
+                <li>
+                  <div class="custome_dropdown">
+                    <ul>
+                      <li>
+                        <a data-title="Aceptamos Bitcoins">
+                          <img src="assets/assetsfruit/images/bitcoin.png" alt="paypal" />
+                        </a>
+                      </li>
+                    </ul>
+                  </div>
+                </li>
+                <li class="dropdown" [hidden]="this._uw.currency==this._uw.info[0].colp || this._uw.currency==this._uw.info[0].usd">
+                  <a class="dropdown-toggle"  style="cursor: pointer;" data-toggle="dropdown" >Bs.S.</a>
+                  <div class="dropdown-menu shadow dropdown-menu-right" >
+                    <ul>
+                        <li *ngIf="this._uw.info[0]">
+                          <a class="dropdown-item" style="cursor: pointer;" data-title="Peso Colombiano" (click)=setColp()> COLP (Bs.S. {{this._uw.info[0].colp}})</a>
+                        </li>
+                        <li *ngIf="this._uw.info[0]"> 
+                          <a class="dropdown-item"  style="cursor: pointer;"data-title="Dolar EEUU" (click)=setUsd()>$ USD (Bs.S. {{1/this._uw.info[0].usd |  number:'1.0-0' }})</a>
+                        </li>
+                    </ul>
+                  </div>
+                </li>
+
+                <li class="dropdown" [hidden]="this._uw.currency==this._uw.info[0].bs || this._uw.currency==this._uw.info[0].usd">
+                  <a class="dropdown-toggle"  style="cursor: pointer;" data-toggle="dropdown" >COLP (Bs.S. {{this._uw.info[0].colp}}) </a>
+                  <div class="dropdown-menu shadow dropdown-menu-right" >
+                    <ul>
+                        <li *ngIf="this._uw.info[0]">
+                          <a class="dropdown-item" style="cursor: pointer;" data-title="Peso Colombiano" (click)=setBs()> Bs.S. </a>
+                        </li>
+                        <li *ngIf="this._uw.info[0]"> 
+                          <a class="dropdown-item"  style="cursor: pointer;"data-title="Dolar EEUU" (click)=setUsd()>$ USD (Bs.S. {{1/this._uw.info[0].usd |  number:'1.0-0' }})</a>
+                        </li>
+                    </ul>
+                  </div>
+                </li>
+                
+                <li class="dropdown" [hidden]="this._uw.currency==this._uw.info[0].bs || this._uw.currency==this._uw.info[0].colp">
+                  <a class="dropdown-toggle"  style="cursor: pointer;" data-toggle="dropdown" >USD (Bs.S. {{1/this._uw.info[0].usd |  number:'1.0-0' }})</a>
+                  <div class="dropdown-menu shadow dropdown-menu-right" >
+                    <ul>
+                      <li *ngIf="this._uw.info[0]">
+                          <a class="dropdown-item" style="cursor: pointer;" data-title="Peso Colombiano" (click)=setBs()> Bs.S. </a>
+                        </li>
+                        <li *ngIf="this._uw.info[0]">
+                          <a class="dropdown-item"  style="cursor: pointer;"data-title="Peso Colombiano" (click)=setColp()> COLP (Bs.S. {{this._uw.info[0].colp}})</a>
+                        </li>
+                    </ul>
+                  </div>
+                </li>
+              </ul>
+            </div>
+        </div>
+    </div>
+  </div>
+  <div class="container">
+    <nav class="navbar navbar-expand-lg"> 
+      <a class="navbar-brand" (click)="initQuan2()">
+        <img class="logo_light" src="assets/assetsfruit/images/logo_white.png" alt="logo" />
+        <img class="logo_dark" src="assets/assetsfruit/images/logo_dark.png" alt="logo" />
+        <img class="logo_default" src="assets/assetsfruit/images/logo_dark.png" alt="logo" />
+      </a>
+      <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
+      </div>
+       <div class="table-responsive col-md-6" [hidden]="!router.url.includes('/fruitcart')" style="padding-top: 10px;">  
+                <table class="table" *ngIf="this._uw.info[0]" style="border-top: 0px;">
+                    <tbody style="border-top: 0px;">
+                        <tr style="border-top: 0px;">
+                            <td class="cart_total_label" style="border-top: 0px; text-align: right;">
+                                <h5 style="font-size: 20px;" >Sub Total</h5>
+                            </td>
+                            <td class="cart_total_amount" style="border-top: 0px; font-size: 20px; text-align: right;"><strong>
+                                 <span class="cart_amount" [hidden]="this._uw.currency==this._uw.info[0].bs || this._uw.currency==this._uw.info[0].colp"> 
+                                    <span class="price_symbole">$
+                                    </span>
+                                {{this._uw.subTotal*this._uw.currency | number :'1.2-2' }}
+                                </span>
+                                <span class="cart_amount" [hidden]="this._uw.currency==this._uw.info[0].bs || this._uw.currency==this._uw.info[0].usd"> 
+                                    <span class="price_symbole">COLP
+                                    </span>
+                                {{this._uw.subTotal*this._uw.currency | number :'1.0-0' }}
+                                </span>
+                                <span class="cart_amount" [hidden]="this._uw.currency==this._uw.info[0].colp || this._uw.currency==this._uw.info[0].usd"> 
+                                    <span class="price_symbole">Bs.S.
+                                    </span>
+                                {{this._uw.subTotal*this._uw.currency | number :'1.0-0' }}
+                                </span>
+                            </strong></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+      <ul class="navbar-nav attr-nav align-items-center">
+
+    
+        <!-- <li [hidden]="router.url.includes('/fruitcart')">
+          <a href="javascript:void(0);" class="nav-link search_trigger"><i class="ion-ios-search-strong"></i>
+          </a>
+          <div class="search-overlay">
+            <div class="search_wrap">
+              <form>
+                  <div class="rounded_input">
+                  	<input type="text" placeholder="Search" class="form-control" id="search_input">
+                  </div>
+                  <button type="submit" class="search_icon"><i class="fas fa-search"></i></button>
+              </form>
+            </div>
+          </div>
+        </li> -->
+
+ <!-- CARRO DESPLEGABLE 1 -->
+  <li class="dropdown cart_wrap" [hidden]="router.url.includes('/fruitcart')" *ngIf="this._uw.info[0]">
+    <a class="nav-link"  data-toggle="dropdown">
+          <i class="ion-social-usd-outline" [hidden]="this._uw.currency==this._uw.info[0].usd"></i>
+          <i class="ion-social-usd" [hidden]="this._uw.currency!=this._uw.info[0].usd"></i>
+        </a>
+         <div class="cart_box dropdown-menu dropdown-menu-right"  >
+            <ul class="cart_list">
+              <li [hidden]="this._uw.currency==this._uw.info[0].bs" (click)=setBs() style="cursor: pointer;">
+                  <a    >Tengo Bs.S.</a>
+                
+                </li>
+
+                <li  [hidden]="this._uw.currency==this._uw.info[0].colp"  (click)=setColp() style="cursor: pointer;">
+                  <a   >Tengo Pesos Colombianos ({{this._uw.info[0].colp}}) </a>
+                 
+                </li>
+                
+                <li [hidden]="this._uw.currency==this._uw.info[0].usd" (click)=setUsd() style="cursor: pointer;"> 
+                  <a    >Tengo Dólares Estadounidenses ({{1/this._uw.info[0].usd |  number:'1.0-0' }})</a>
+                
+                </li>
+            </ul>
+         </div>
+  </li>
+  <!-- FIN CARRO DESPLEGABLE 1-->
+
+
+
+
+          <!-- CARRO DESPLEGABLE -->
+        <li class="dropdown cart_wrap" [hidden]="router.url.includes('/fruitcart')">
+        	<a class="nav-link"  data-toggle="dropdown">
+            <i class="ion-bag"></i>
+            <span class="cart_count" [hidden]="this._uw.numProd==0">{{this._uw.numProd}}</span>
+          </a>
+          <div class="cart_box dropdown-menu dropdown-menu-right" [hidden]="this._uw.car.length==0" *ngIf="this._uw.info[0]">
+            <ul class="cart_list" [hidden]="this._uw.car.length==0">
+              <li *ngFor="let tix of this._uw.car;let i = index" [hidden]="i>2" >
+                <a (click)="remove(i)" class="item_remove"><i class="ion-close"></i></a>
+                <a ><img src="{{tix.images[0]}}" alt="">{{tix.productName}}</a>
+                <span class="cart_quantity" [hidden]="this._uw.currency==this._uw.info[0].bs || this._uw.currency==this._uw.info[0].colp"> {{this._uw.car[i].quantity}} x 
+                  <span class="cart_amount"> 
+                    <span class="price_symbole">$
+                    </span>
+                    {{this._uw.car[i].globalPrice*this._uw.currency | number :'1.2-2'}}
+                  </span>
+                </span>
+                 <span class="cart_quantity" [hidden]="this._uw.currency==this._uw.info[0].bs || this._uw.currency==this._uw.info[0].usd"> {{this._uw.car[i].quantity}} x 
+                  <span class="cart_amount"> 
+                    <span class="price_symbole">COLP
+                    </span>
+                    {{this._uw.car[i].globalPrice*this._uw.currency | number :'1.0-0'}}
+                  </span>
+                </span>
+                <span class="cart_quantity"> {{this._uw.car[i].quantity}} x 
+                  <span class="cart_amount"> 
+                    <span class="price_symbole">Bs.S.
+                    </span>
+                    {{this._uw.car[i].globalPrice*this._uw.currency | number :'1.0-0'}}
+                  </span>
+                </span>
+              </li>
+              <li *ngIf="this._uw.car"[hidden]="this._uw.car.length<4 || this._uw.car.length==4">
+                {{this._uw.car.length-3}} productos más ...
+              </li>
+              <li *ngIf="this._uw.car"[hidden]="this._uw.car.length<4 || this._uw.car.length>4">
+                {{this._uw.car.length-3}} producto más ...
+              </li>
+            </ul>
+            <div class="cart_footer" [hidden]="this._uw.car.length==0" *ngIf="this._uw.info[0]">
+              <p class="cart_total">Sub-Total: 
+                <span class="cart_amount" [hidden]="this._uw.currency==this._uw.info[0].bs || this._uw.currency==this._uw.info[0].colp"> 
+                    <span class="price_symbole">$
+                    </span>
+                {{this._uw.subTotal*this._uw.currency | number :'1.2-2' }}
+                </span>
+                <span class="cart_amount" [hidden]="this._uw.currency==this._uw.info[0].bs || this._uw.currency==this._uw.info[0].usd"> 
+                    <span class="price_symbole">COLP
+                    </span>
+                {{this._uw.subTotal*this._uw.currency | number :'1.0-0' }}
+                </span>
+                <span class="cart_amount" [hidden]="this._uw.currency==this._uw.info[0].colp || this._uw.currency==this._uw.info[0].usd"> 
+                    <span class="price_symbole">Bs.S.
+                    </span>
+                {{this._uw.subTotal*this._uw.currency | number :'1.0-0' }}
+                </span>
+              </p>
+                <p class="cart_buttons">
+                  <a routerLink="fruitcart" class="btn btn-dark btn-radius view-cart">Mi bolsa</a>
+                  <a   routerLink="fruitcart" class="btn btn-default btn-borderd btn-radius checkout">Pagar</a>
+                </p>
+            </div>
+        	</div>
+        </li>
+          <!-- FIN CARRO DESPLEGABLE -->
+      </ul>
+    </nav>
+  </div>
+</header>
+<div class="sidebar_menu" *ngIf="this._uw.imagePreviewProduct">
+  <div class="side_panel_close">
+      <a href="javascript:void(0);" class="sidemenu_close" (click)="initQuan()"><i class="ion-android-close"></i></a>
+  </div>
+  <div class="widget widget_logo">
+      <img src="assets/assetsfruit/images/logo_dark.png" alt="logo_dark"/>
+  </div>
+  <div class="widget widget_text">
+
+    <div class="product_img" style="width: 100%;" >
+       <span class="pr_flash bg_green">{{this._uw.tixPreview.category}}</span>
+       <img src="{{this._uw.imagePreviewProduct}}" alt=""/>
+    </div>
+     <div class="pr_detail" *ngIf="this._uw.info[0]">
+      <div class="product-description">
+        <div class="product-title">
+          <h4><a >{{this._uw.tixPreview.productName}}</a></h4>
+          <!-- <p>{{this._uw.tixPreview.description}}</p> -->
+        </div>
+        <div class="product_price float-left">
+          <span [hidden]="this._uw.currency==this._uw.info[0].colp || this._uw.currency==this._uw.info[0].usd">Bs.S. </span>
+          <span [hidden]="this._uw.currency==this._uw.info[0].bs || this._uw.currency==this._uw.info[0].usd">COLP </span>
+          <span [hidden]="this._uw.currency==this._uw.info[0].bs || this._uw.currency==this._uw.info[0].colp">$ USD </span>
+          <span class="price"  [hidden]="this._uw.currency==this._uw.info[0].colp || this._uw.currency==this._uw.info[0].bs">
+         {{this._uw.tixPreview.globalPrice*this._uw.currency  |  number:'1.2-2' }}</span>
+            <span [hidden]="this._uw.tixPreview.quantity==1 || this._uw.currency==this._uw.info[0].colp || this._uw.currency==this._uw.info[0].bs " > x {{this._uw.tixPreview.quantity}} {{this._uw.tixPreview.presentacion}} = </span>
+            <span [hidden]="this._uw.tixPreview.quantity==1 || this._uw.currency==this._uw.info[0].colp || this._uw.currency==this._uw.info[0].bs " style="color: #07d765;">  {{this._uw.tixPreview.globalPrice*this._uw.currency*this._uw.tixPreview.quantity  |  number:'1.2-2' }}</span>
+            <span class="price"  [hidden]="this._uw.currency==this._uw.info[0].usd">
+            {{this._uw.tixPreview.globalPrice*this._uw.currency  |  number:'1.0-0' }} </span><span [hidden]="this._uw.tixPreview.quantity==1 || this._uw.currency==this._uw.info[0].usd" > x {{this._uw.tixPreview.quantity}} {{this._uw.tixPreview.presentacion}} = </span>
+            <span [hidden]="this._uw.tixPreview.quantity==1 || this._uw.currency==this._uw.info[0].usd" style="color: #07d765;"> {{this._uw.tixPreview.globalPrice*this._uw.currency*this._uw.tixPreview.quantity  |  number:'1.0-0' }}</span>
+            <span  [hidden]="this._uw.tixPreview.quantity>1"> ({{this._uw.tixPreview.presentacion}})</span>
+        </div>
+        <!-- <div class="rating mt-2 float-right">
+          <div class="product_rate" style="width:20%">
+          </div>
+        </div> -->
+<!--         <div class=" mt-2 float-right">
+          <span> ({{this._uw.tixPreview.presentacion}})</span>
+        </div> -->
+        <!-- <div class="clearfix"></div> -->
+        <!-- <hr / > -->
+        
+      </div>
+      <hr style="margin-top: 3rem; border-top: 0px;">
+      <hr/>
+      <div class="cart_extra">
+        <div class="cart-product-quantity">
+          <div class="quantity">
+            <input type="button" value="-" (click)="minus()" class="minus">
+            <input type="number" [(ngModel)]="this._uw.tixPreview.quantity" value="1" class="qty" size="1" disabled="disabled">
+            <input type="button" value="+" (click)="plus()" class="plus">
+          </div>
+        </div>
+        <div class="cart_btn">
+            <button class="btn btn-default btn-radius btn-sm btn-addtocart btn-borderd sidemenu_close" type="button" (click)="addToBag()">Comprar</button>
+        </div>
+      </div>
+      <!-- <div class="clearfix"></div> -->
+   
+      <!-- <ul class="product-meta list_none">
+        <li>Categoria: <a >{{this._uw.tixPreview.category}}</a>
+      </ul> -->
+    </div>
+  </div>
+</div>
+  
