@@ -48,4 +48,10 @@ export class DataApiService {
 		.post<OrderInterface>(url_api, order)
 		.pipe(map(data => data));
 	}
+	senMailNewBookAppToAdmin(book){
+		const url_api='https://db.andesproadventures.com:3006/newBookAppToAdmin';
+		return this.http
+		.post(url_api, book)
+		.pipe(map(data => data));
+	}
 }

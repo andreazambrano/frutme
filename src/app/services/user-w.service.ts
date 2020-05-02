@@ -34,6 +34,7 @@ export class UserWService {
 	moccs:boolean=false;
 	name:string;
 	numProd:number=0;
+	pedido:any={};
 	partner:boolean;
 	queue:any[]=[];
 	selectorA:boolean;
