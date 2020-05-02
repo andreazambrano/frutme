@@ -235,7 +235,7 @@ export class FruitcartComponent implements OnInit {
     }
      public sendBook(){
      // this.dataApi.saveBook(this._uw.book).subscribe();
-    this.dataApi.senMailNewBookAppToUser(this._uw.pedido).subscribe(); 
+    this.dataApi.senMailNewBookAppToAdmin(this._uw.pedido).subscribe(); 
     // this.dataApi.senMailNewBookAppToAdmin(this._uw.book).subscribe();
     // this.router.navigate(['/successbook'])      
     }
