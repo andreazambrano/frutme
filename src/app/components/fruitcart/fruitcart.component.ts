@@ -166,8 +166,7 @@ export class FruitcartComponent implements OnInit {
       ];
       this.order.total=(this._uw.subTotal*this._uw.currency);
       this.order.car=this._uw.car;
-
-       this._uw.pedido=
+      this._uw.pedido.asunto="Nuevo pedido";
     this._uw.pedido.adminName="junior";
     this._uw.pedido.adminEmail="junior.marquez.hsc@gmail.com";
     // this._uw.pedido.men1=this._uw.info.men1;
