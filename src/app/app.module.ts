@@ -34,6 +34,9 @@ import {MatBadgeModule} from '@angular/material/badge';
 import {MatTableModule} from '@angular/material/table';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import { MatRadioModule } from '@angular/material/radio';
+
+
+import { FilePickerModule } from  '../assets/file-picker/src/public_api';
 //COMPONENTS
 import { TestappComponent } from './components/testapp/testapp.component';
 import { FruitfooterComponent } from './components/fruitfooter/fruitfooter.component';
@@ -44,7 +47,6 @@ import { FruitproductsComponent } from './components/fruitproducts/fruitproducts
 import { FruittopbarComponent } from './components/fruittopbar/fruittopbar.component';
 import { Component, Inject} from '@angular/core';
 import { FruitcartComponent } from './components/fruitcart/fruitcart.component';
-import { FooterComponent } from './components/footer/footer.component';
 import { PagoComponent } from './components/pago/pago.component';
 
 @NgModule({
@@ -58,7 +60,6 @@ import { PagoComponent } from './components/pago/pago.component';
     FruitproductsComponent,
     FruittopbarComponent,
     FruitcartComponent,
-    FooterComponent,
     PagoComponent,
   ],
   imports: [
@@ -77,6 +78,7 @@ import { PagoComponent } from './components/pago/pago.component';
     MatTableModule,
     ArchwizardModule,
     CarouselModule,
+    FilePickerModule,
     MatRadioModule,
   ],
   exports: [

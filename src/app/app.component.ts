@@ -4,6 +4,7 @@ import { IpbucketService } from "./services/ipbucket.service";
 import { DataApiService } from "./services/data-api.service";
 import { ProductInfoService } from "./services/product-info.service";
 import { UserWService } from "./services/user-w.service";
+import { SwUpdate } from '@angular/service-worker';
 // declare var $: any;
 @Component({
   selector: 'app-root',
@@ -16,12 +17,23 @@ export class AppComponent implements OnInit {
  	public _pi:ProductInfoService, 
  	public ipbucket:IpbucketService,
  	public _uw:UserWService, 
+  private swUpdate:SwUpdate,
  	public dataApi:DataApiService){
 
  }
  loadAPI = null;  
    url = "assets/assetsfruit/js/scripts.js";
     ngOnInit() {
+
+      if (this.swUpdate.isEnabled) {
+            this.swUpdate.available.subscribe(() => {
+                if(confirm("Frutme tiene nuevas mejoras. desea cargar esta nueva versión?")) {
+                    window.location.reload();
+                }
+            });
+        }    
+
+
   	 if (this._uw.loaded==true){
           this.loadAPI = new Promise(resolve => {
             this.loadScript();

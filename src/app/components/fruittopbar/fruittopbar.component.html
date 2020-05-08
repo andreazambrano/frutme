@@ -1,5 +1,5 @@
 <header class="header_wrap dark_skin main_menu_uppercase">
-	<div class="top-header bg_gray">
+	<div class="top-header bg_gray" [hidden]="router.url.includes('/pago')">
     <div class="container">
         <div class="row align-items-center">
             <div class="col-md-7">
@@ -43,7 +43,7 @@
                     </ul>
                   </div>
                 </li>
-                <li class="dropdown" [hidden]="this._uw.currency==this._uw.info[0].colp || this._uw.currency==this._uw.info[0].usd">
+                <li class="dropdown" [hidden]="this._uw.currency==this._uw.info[0].colp || this._uw.currency==this._uw.info[0].usd || this._uw.recargo">
                   <a class="dropdown-toggle"  style="cursor: pointer;" data-toggle="dropdown" >Bs.S.</a>
                   <div class="dropdown-menu shadow dropdown-menu-right" >
                     <ul>
@@ -57,7 +57,7 @@
                   </div>
                 </li>
 
-                <li class="dropdown" [hidden]="this._uw.currency==this._uw.info[0].bs || this._uw.currency==this._uw.info[0].usd">
+                <li class="dropdown" [hidden]="this._uw.currency==this._uw.info[0].bs || this._uw.currency==this._uw.info[0].usd || this._uw.recargo">
                   <a class="dropdown-toggle"  style="cursor: pointer;" data-toggle="dropdown" >COLP (Bs.S. {{this._uw.info[0].colp}}) </a>
                   <div class="dropdown-menu shadow dropdown-menu-right" >
                     <ul>
@@ -71,7 +71,7 @@
                   </div>
                 </li>
                 
-                <li class="dropdown" [hidden]="this._uw.currency==this._uw.info[0].bs || this._uw.currency==this._uw.info[0].colp">
+                <li class="dropdown" [hidden]="this._uw.currency==this._uw.info[0].bs || this._uw.currency==this._uw.info[0].colp || this._uw.recargo">
                   <a class="dropdown-toggle"  style="cursor: pointer;" data-toggle="dropdown" >USD (Bs.S. {{1/this._uw.info[0].usd |  number:'1.0-0' }})</a>
                   <div class="dropdown-menu shadow dropdown-menu-right" >
                     <ul>
@@ -145,7 +145,7 @@
         </li> -->
 
  <!-- CARRO DESPLEGABLE 1 -->
-  <li class="dropdown cart_wrap" [hidden]="router.url.includes('/fruitcart')" *ngIf="this._uw.info[0]">
+  <li class="dropdown cart_wrap" [hidden]="router.url.includes('/fruitcart') || router.url.includes('/pago')" *ngIf="this._uw.info[0]">
     <a class="nav-link"  data-toggle="dropdown">
           <i class="ion-social-usd-outline" [hidden]="this._uw.currency==this._uw.info[0].usd"></i>
           <i class="ion-social-usd" [hidden]="this._uw.currency!=this._uw.info[0].usd"></i>
@@ -175,7 +175,7 @@
 
 
           <!-- CARRO DESPLEGABLE -->
-        <li class="dropdown cart_wrap" [hidden]="router.url.includes('/fruitcart')">
+        <li class="dropdown cart_wrap" [hidden]="router.url.includes('/fruitcart') || router.url.includes('/pago')">
         	<a class="nav-link"  data-toggle="dropdown">
             <i class="ion-bag"></i>
             <span class="cart_count" [hidden]="this._uw.numProd==0">{{this._uw.numProd}}</span>

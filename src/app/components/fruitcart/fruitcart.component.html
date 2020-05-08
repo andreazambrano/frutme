@@ -105,23 +105,32 @@
                                 <td class="cart_total_label">Reparto</td>
                                 <td class="cart_total_amount">Reparto Gratis</td>
                             </tr>
+                             <tr [hidden]="!_uw.recargo || this.ngFormSendOrder.value.metodo!='bitcoin'">
+                                <td class="cart_total_label">Recargo Bitcoin ({{this._uw.info[0].bitcoin}} %)</td>
+                                <td class="cart_total_amount">{{this._uw.subTotal*this._uw.currency*(this._uw.info[0].bitcoin/100) | number :'1.2-2' }}</td>
+                            </tr>
+                            <tr [hidden]="!_uw.recargo || this.ngFormSendOrder.value.metodo!='paypal'">
+                                <td class="cart_total_label">Recargo Paypal ({{this._uw.info[0].paypal}} %)</td>
+                                <td class="cart_total_amount">{{this._uw.subTotal*this._uw.currency*(this._uw.info[0].paypal/100) | number :'1.2-2' }}</td>
+                            </tr>
+                          
                             <tr>
                                 <td class="cart_total_label">Total</td>
                                 <td class="cart_total_amount"><strong>
                                      <span class="cart_amount" [hidden]="this._uw.currency==this._uw.info[0].bs || this._uw.currency==this._uw.info[0].colp"> 
                                         <span class="price_symbole">$
                                         </span>
-                                    {{this._uw.subTotal*this._uw.currency | number :'1.2-2' }}
+                                    {{(this._uw.subTotal*this._uw.currency)+this.recargo | number :'1.2-2' }}
                                     </span>
                                     <span class="cart_amount" [hidden]="this._uw.currency==this._uw.info[0].bs || this._uw.currency==this._uw.info[0].usd"> 
                                         <span class="price_symbole">COLP
                                         </span>
-                                    {{this._uw.subTotal*this._uw.currency | number :'1.0-0' }}
+                                    {{(this._uw.subTotal*this._uw.currency)+this.recargo | number :'1.0-0' }}
                                     </span>
                                     <span class="cart_amount" [hidden]="this._uw.currency==this._uw.info[0].colp || this._uw.currency==this._uw.info[0].usd"> 
                                         <span class="price_symbole">Bs.S.
                                         </span>
-                                    {{this._uw.subTotal*this._uw.currency | number :'1.0-0' }}
+                                    {{(this._uw.subTotal*this._uw.currency)+this.recargo | number :'1.0-0' }}
                                     </span>
                                 </strong></td>
                             </tr>
@@ -145,15 +154,15 @@
                         </select> -->
                         <select    id="metodo" formControlName="metodo" [(ngModel)]="order.metodo"
                         [ngClass]="{ 'is-invalid': submitted && fval.metodo.errors }"
-                        required class="nice-select" >
+                        required class="nice-select"   (click)="setMetodo()">
                             <option value="bsTansferencia">BsS Transferencia</option>
-                            <option value="bitcoin" (click)="currencyBit()">Bitcoin</option>
-                            <option value="paypal" (click)="currencyPaypal()">PayPal</option>
+                            <option value="bitcoin" >Bitcoin</option>
+                            <option value="paypal">PayPal</option>
                             <option value="bsPago">BsS pago en linea Banco Mercantil</option>
                             <option value="bsPunto">BsS Punto de venta</option>
                             <option value="colp">Pesos Colombianos</option>
-                            <option value="usd">$ USD Efectivo</option>
-                            <option value="usd">$ USD Transferencia</option>        
+                            <option value="usd" >$ USD Efectivo</option>
+                            <option value="usdt" >$ USD Transferencia</option>        
                         </select>
 
 

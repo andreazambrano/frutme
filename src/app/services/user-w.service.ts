@@ -23,6 +23,7 @@ export class UserWService {
 	errorFormPartner:boolean;
 	errorFormSendSale:boolean;
 	errorFormSendOrder:boolean;
+	errorFormPago:boolean;
 	file:any[]=[];
 	foredit:any={};
 	idCard:string;
@@ -34,9 +35,13 @@ export class UserWService {
 	moccs:boolean=false;
 	name:string;
 	numProd:number=0;
+	order:any={};
+	orderPro:any={};
+	pagoImage:any[]=[];
 	pedido:any={};
 	partner:boolean;
 	queue:any[]=[];
+	recargo:boolean=false;
 	selectorA:boolean;
 	selectorB:boolean;
 	subTotal:number=0;

@@ -8,9 +8,7 @@ import { OrderInterface } from '../../models/order-interface';
 import { SaleInterface } from '../../models/sale-interface'; 
 import { FormBuilder, FormGroup,  Validators } from '@angular/forms';
 import { ScrollTopService }  from '../../services/scroll-top.service';
-// import { ValidationError } from '../../../assets/file-picker/src/lib/validation-error.model';
 import { isError } from "util";
-// import { FilePickerComponent } from '../../../assets/file-picker/src/lib/file-picker.component';
 
 @Component({
   selector: 'app-fruitcart',
@@ -18,7 +16,7 @@ import { isError } from "util";
   styleUrls: ['./fruitcart.component.css']
 })
 export class FruitcartComponent implements OnInit {
-
+  info:any={};
   constructor(
     public scrollTopService:ScrollTopService,
   	public _uw:UserWService,
@@ -27,10 +25,22 @@ export class FruitcartComponent implements OnInit {
   	private location: Location,
     private formBuilder: FormBuilder
   	) { }
-    loadAPI = null;  
+  npedido=0;
+    loadAPI = null;
+    recargo=0;  
     url4="assets/assetsfruit/js/jquery.parallax-scroll.js";
     url5 = "assets/assetsfruit/js/scripts.js";
-   
+    loadInfo(){
+    this.dataApi
+    .getInfo()
+    .subscribe((res:any) => {
+      if (res[0] === undefined){
+       }else{
+        this.info=res;
+        this._uw.info=this.info;
+        }
+     });
+  }
   public aleatorio(a,b) {
     return Math.round(Math.random()*(b-a)+parseInt(a));
   }
@@ -114,10 +124,6 @@ export class FruitcartComponent implements OnInit {
       total: [0,[Validators.required]]
     });
 
-  	if(this._uw.numProd<1){
-  	// this.router.navigate(['/']);
-    }
-
   	if (this._uw.loaded==true){
   	    this.loadAPI = new Promise(resolve => {
           this.loadScript();
@@ -145,9 +151,64 @@ export class FruitcartComponent implements OnInit {
       node.charset = "utf-8";
       document.getElementsByTagName("head")[0].appendChild(node);
     }
+    setColp(){
+      this.loadInfo();
+      this._uw.currency=this._uw.info[0].colp;
+    }
+    setBs(){
+      this.loadInfo();
+      this._uw.currency=this._uw.info[0].bs;
+    }
+    setUsd(){
+      this.loadInfo();
+   
+      this._uw.currency=this._uw.info[0].usd;
+    }
 
-    public currencyBit(){}
-    public currencyPaypal(){}
+    public setMetodo(){
+      if(this.ngFormSendOrder.value.metodo=="bsTansferencia"){
+           this.recargo=0;
+           this._uw.recargo=false;
+        this.setBs();
+      }   
+       if(this.ngFormSendOrder.value.metodo=="bitcoin"){
+          this.setUsd();
+         this.recargo=(this._uw.subTotal*this._uw.currency)*(this._uw.info[0].bitcoin/100);
+             this._uw.recargo=true;
+      } 
+      if(this.ngFormSendOrder.value.metodo=="paypal"){
+          this.setUsd();
+          this.recargo=(this._uw.subTotal*this._uw.currency)*(this._uw.info[0].paypal/100);
+             this._uw.recargo=true;
+      } 
+       if(this.ngFormSendOrder.value.metodo=="bsTansferencia"){
+        this.recargo=0;
+        this.setBs();
+           this._uw.recargo=false;
+      } 
+       if(this.ngFormSendOrder.value.metodo=="bsPunto"){
+        this.recargo=0;
+        this.setBs();
+           this._uw.recargo=false;
+      } 
+       if(this.ngFormSendOrder.value.metodo=="colp"){
+        this.recargo=0;
+        this.setColp();
+           this._uw.recargo=false;
+      } 
+       if(this.ngFormSendOrder.value.metodo=="usd"){
+        this.recargo=0;
+          this.setUsd();
+             this._uw.recargo=false;
+      }    
+       if(this.ngFormSendOrder.value.metodo=="usdt"){
+        this.recargo=0;
+          this.setUsd();
+             this._uw.recargo=true;
+      }      
+    }
+
+   
     public okOrder(){
       this.submitted = true;
         if (this.ngFormSendOrder.invalid) {
@@ -157,7 +218,9 @@ export class FruitcartComponent implements OnInit {
       this._uw.errorFormSendOrder=false;
       this.order = this.ngFormSendOrder.value;
       this.order.status="new";
-      this.order.npedido=this.aleatorio(10000,99999);
+      this.npedido=this.aleatorio(10000,99999);
+      let npedidoString = this.npedido.toString();
+      this.order.npedido=npedidoString;
       this.order.steeps=[
         {steep:true},
         {steep:false},
@@ -167,21 +230,13 @@ export class FruitcartComponent implements OnInit {
       this.order.total=(this._uw.subTotal*this._uw.currency);
       this.order.car=this._uw.car;
       this._uw.pedido.asunto="Nuevo pedido";
-    this._uw.pedido.adminName="junior";
-    this._uw.pedido.adminEmail="junior.marquez.hsc@gmail.com";
-    // this._uw.pedido.men1=this._uw.info.men1;
-    // this._uw.pedido.numeroCuenta=this._uw.info.numeroCuenta;
-    // this._uw.pedido.rut=this._uw.info.rut;
-    // this._uw.pedido.titular=this._uw.info.titular;
-    // this._uw.pedido.emailContacto=this._uw.info.emailContacto;
-    // this._uw.pedido.telefonoContacto=this._uw.info.telefonoContacto;
-        this.dataApi.senMailNewBookAppToAdmin(this._uw.pedido).subscribe();
-
-      return this.dataApi.saveOrder(this.order).subscribe();
-
-
-
-
+      this._uw.pedido.adminName=this._uw.info[0].adminName;
+      this._uw.pedido.adminEmail=this._uw.info[0].adminEmail;
+      // this.dataApi.sendMailNewBookAppToAdmin(this._uw.pedido).subscribe();
+      this._uw.order=this.order;
+      this.dataApi.saveOrder(this.order).subscribe(
+            tix => this.router.navigate(['/pago'])
+        );
     }
 
     public minus(index){
@@ -233,8 +288,10 @@ export class FruitcartComponent implements OnInit {
       document.getElementsByTagName("head")[0].appendChild(node);
     }
      public sendBook(){
+    // this.dataApi.sendMailNewBookAppToAdmin(this._uw.pedido).subscribe();  ACTIVAR EST LINEA
+
      // this.dataApi.saveBook(this._uw.book).subscribe();
-    this.dataApi.senMailNewBookAppToAdmin(this._uw.pedido).subscribe(); 
+ 
     // this.dataApi.senMailNewBookAppToAdmin(this._uw.book).subscribe();
     // this.router.navigate(['/successbook'])      
     }

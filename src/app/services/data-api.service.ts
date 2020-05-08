@@ -48,10 +48,35 @@ export class DataApiService {
 		.post<OrderInterface>(url_api, order)
 		.pipe(map(data => data));
 	}
-	senMailNewBookAppToAdmin(book){
+	sendMailNewBookAppToAdmin(book){
 		const url_api='https://db.andesproadventures.com:3006/newBookAppToAdmin';
 		return this.http
 		.post(url_api, book)
 		.pipe(map(data => data));
 	}
+	updateOrder(order :OrderInterface, id: string){
+		// let token = this.authService.getToken();
+		const url_api=`https://db.andesproadventures.com:3025/api/order/${id}`;
+		return this.http
+		.put<OrderInterface>(url_api, order)
+		.pipe(map(data => data));
+	}
+	getOrderByNpedido(npedido: string){
+		const url_api = `https://db.andesproadventures.com:3025/api/order?filter[where][npedido]=${npedido}`;
+		this.order = this.http.get(url_api);
+		return (this.order);
+
+		// return this.http.get(url_api);
+
+		// return this.http.get(url_api);
+	}
+
+		// let indice = id;
+		// const url_api=`https://db.andesproadventures.com:3018/api/book/${indice}`;
+		// this.book = this.http.get(url_api);
+		// return (this.book);
+
+
+		// this.info = this.http.get(url_api);
+		// return (this.info);
 }

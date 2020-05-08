@@ -8,6 +8,7 @@ export interface OrderInterface {
 	status?:string;
 	telefono?:string;
 	total?:number;
-	npedido?:number;
+	npedido?:string;
 	steeps?:Array<any>;	
+	pagoImage?:Array<string>;
 }
