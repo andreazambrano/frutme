@@ -2,7 +2,7 @@
 	<div class="top-header " style="background: #037b39 !important; color:white;" [hidden]="router.url.includes('/pago')">
     <div class="container">
         <div class="row align-items-center">
-            <div class="col-md-7">
+            <div class="col-md-5">
               <ul class="contact_detail border_list list_none text-center text-md-left">
                 <li>
 <!-- 
@@ -13,14 +13,25 @@
                   <a href="tel:584147529202" style="cursor: pointer; color:white;"><i class="ti-mobile"></i> <span>(414) 752 9202</span></a>
                 </li>
                 <li>
-                   <a href="mailto:soporte@frutme.com"  style="color:white;">soporte@frutme.com</a>
+                   <a href="mailto:soporte@frutme.com"  style="color:white;">compras@frutme.com</a>
                   <!-- <a ><i class="ti-email"></i> <span>soporte@frutme.com</span></a> -->
                 </li>
               </ul>
             </div>
-            <div class="col-md-5" *ngIf="this._uw.info[0]">
+            <div class="col-md-7" *ngIf="this._uw.info[0]">
               <ul class="header_list border_list list_none header_dropdown text-center text-md-right" *ngIf="this._uw.info[0]">
-                <li>Compra también con tus</li>
+                <li>compra con</li>
+                <li>
+                  <div class="custome_dropdown">
+                    <ul>
+                      <li>
+                        <a data-title="Aceptamos Zelle">
+                          <img src="assets/assetsfruit/images/zelle.png" alt="zelle" />
+                        </a>
+                      </li>                                      
+                    </ul>
+                  </div>
+                </li>
                 <li>
                   <div class="custome_dropdown">
                     <ul>
