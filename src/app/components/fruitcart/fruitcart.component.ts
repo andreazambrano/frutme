@@ -232,7 +232,7 @@ export class FruitcartComponent implements OnInit {
       this._uw.pedido.asunto="Nuevo pedido";
       this._uw.pedido.adminName=this._uw.info[0].adminName;
       this._uw.pedido.adminEmail=this._uw.info[0].adminEmail;
-      // this.dataApi.sendMailNewBookAppToAdmin(this._uw.pedido).subscribe();
+      //this.dataApi.sendMailNewBookAppToAdmin(this._uw.pedido).subscribe();
       this._uw.order=this.order;
       this.dataApi.saveOrder(this.order).subscribe(
             tix => this.router.navigate(['/pago'])
