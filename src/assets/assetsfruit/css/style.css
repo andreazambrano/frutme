@@ -1667,7 +1667,8 @@ header.light_skin.nav-fixed .social_icons li a:hover {
 	height: 100vh;
 	/*background: rgba(0, 0, 0, 0.7);*/
 	/*fondo de pop*/
-		background:  #33333c82;
+	 background:  #005e5391;
+		/*background:  #33333c82;*/
 	/*background:  #07984761;*/
 	z-index: 1000;
 	top: 0;
