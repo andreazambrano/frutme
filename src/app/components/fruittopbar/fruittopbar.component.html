@@ -155,7 +155,7 @@
           </div>
         </li> -->
   <li class="dropdown cart_wrap" [hidden]="!this._uw.globalCategory || router.url.includes('/fruitcart') || router.url.includes('/pago')">
-          <a class="nav-link"  data-toggle="dropdown" (click)="filter()" style="cursor: pointer;">
+          <a class="nav-link"  data-toggle="dropdown"  >
             <i class="ion-pricetag" style="color: green;"></i>
             <!-- <span class="cart_count" ></span> -->
           </a>
@@ -163,8 +163,8 @@
             <ul class="cart_list" >
               <li  >
               
-                <a [hidden]="!this._uw.filter">Ver todos</a>
-             <a [hidden]="this._uw.filter">Ver solo disponibles</a>
+                <a [hidden]="!this._uw.filter" (click)="filter()" style="cursor: pointer;">Ver todos</a>
+             <a [hidden]="this._uw.filter" (click)="filter()" style="cursor: pointer;">Ver solo disponibles</a>
              
              
               </li>
