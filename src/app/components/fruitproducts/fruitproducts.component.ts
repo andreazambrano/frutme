@@ -49,6 +49,14 @@ export class FruitproductsComponent implements OnInit {
     this.loadInfo();
     this.getAllTixs();
   }
+  public globalCategoryOff(){
+    this._uw.globalCategory=false;
+    this._uw.filter=false;
+  }
+    public globalCategoryOn(){
+    this._uw.globalCategory=true;
+    // this._uw.filter=false;
+  }
   getAllTixs(){
     this.dataApi
     .getAllTixs()

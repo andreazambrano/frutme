@@ -25,7 +25,9 @@ export class UserWService {
 	errorFormSendOrder:boolean;
 	errorFormPago:boolean;
 	file:any[]=[];
+	filter:boolean=false;
 	foredit:any={};
+	globalCategory:boolean=true;
 	idCard:string;
 	imagePreviewProduct:string;
 	images:any[]=[];

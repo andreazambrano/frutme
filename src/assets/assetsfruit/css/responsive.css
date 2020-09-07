@@ -1950,8 +1950,8 @@ section.pb_70, .pb_70 {
 	padding: 10px 20px 10px 15px;
 }
 .sidebar_menu {
-	width: 280px;
-	right: -280px;
+	width: 300px;
+	right: -300px;
 }
 .testimonial_style3 .testi_desc::before {
 	top: -10px;

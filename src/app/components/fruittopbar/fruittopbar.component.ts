@@ -57,6 +57,12 @@ export class FruittopbarComponent implements OnInit {
     this._uw.tixPreview.quantity=this._uw.tixPreview.quantity-1;
     }
   }
+  public filter(){
+    if(!this._uw.filter){this._uw.filter=true;}
+    else{
+      this._uw.filter=false;
+    }
+  }
   public plus(){
     this._uw.tixPreview.quantity=this._uw.tixPreview.quantity+1;
   }

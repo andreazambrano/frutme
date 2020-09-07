@@ -154,6 +154,30 @@
             </div>
           </div>
         </li> -->
+  <li class="dropdown cart_wrap" [hidden]="!this._uw.globalCategory || router.url.includes('/fruitcart') || router.url.includes('/pago')">
+          <a class="nav-link"  data-toggle="dropdown" (click)="filter()" style="cursor: pointer;">
+            <i class="ion-pricetag" style="color: green;"></i>
+            <!-- <span class="cart_count" ></span> -->
+          </a>
+          <div class="cart_box dropdown-menu dropdown-menu-right" >
+            <ul class="cart_list" >
+              <li  >
+              
+                <a [hidden]="!this._uw.filter">Ver todos</a>
+             <a [hidden]="this._uw.filter">Ver solo disponibles</a>
+             
+             
+              </li>
+           
+            
+            </ul>
+      
+          </div>
+        </li>
+
+
+
+
 
  <!-- CARRO DESPLEGABLE 1 -->
   <li class="dropdown cart_wrap" [hidden]="router.url.includes('/fruitcart') || router.url.includes('/pago')" *ngIf="this._uw.info[0]">

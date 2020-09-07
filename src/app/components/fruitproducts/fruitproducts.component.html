@@ -15,22 +15,22 @@
             <div class="col-12">
                 <div class="product_content" style="margin-top: -20px;">
                     <ul class="nav nav-tabs justify-content-center animation" data-animation="fadeInUp" data-animation-delay="0.04s" role="tablist">
-                      <li class="nav-item">
-                        <a class="nav-link" id="tab5" data-toggle="tab" href="#tab-5" role="tab" aria-controls="tab-5" aria-selected="false"  ><span class="pr_icon4"></span>Bulbos</a>
+                      <li class="nav-item" (click)="globalCategoryOff()">
+                        <a class="nav-link" id="tab5" data-toggle="tab" href="#tab-5" role="tab" aria-controls="tab-5" aria-selected="false"  ><span class="pr_icon4" (click)="globalCategoryOff()"></span>Bulbos</a>
                       </li>
-                      <li class="nav-item">
+                      <li class="nav-item" (click)="globalCategoryOn()">
                         <a class="nav-link" id="tab3" data-toggle="tab" href="#tab-3" role="tab" aria-controls="tab-3" aria-selected="false"><span class="pr_icon3"></span>Frutos</a>
                       </li>
-                      <li class="nav-item">
+                      <li class="nav-item" (click)="globalCategoryOff()">
                         <a class="nav-link" id="tab4" data-toggle="tab" href="#tab-4" role="tab" aria-controls="tab-4" aria-selected="false"  ><span class="pr_icon5"></span>Legumbres</a>
                       </li>
                        <li class="nav-item">
                         <a class="nav-link" id="tab6" data-toggle="tab" href="#tab-6" role="tab" aria-controls="tab-6" aria-selected="false"  ><span class="pr_icon2"></span>Tubérculos</a>
                       </li>
-                      <li class="nav-item">
+                      <li class="nav-item" (click)="globalCategoryOff()">
                         <a class="nav-link" id="tab2" data-toggle="tab" href="#tab-2" role="tab" aria-controls="tab-2" aria-selected="false" ><span class="pr_icon1"></span>Verduras</a>
                       </li>
-                      <li class="nav-item">
+                      <li class="nav-item" (click)="globalCategoryOn()">
                         <a class="nav-link active" id="tab1" data-toggle="tab" href="#tab-1" role="tab" aria-controls="tab-1" aria-selected="true"  (click)="refresh()">
                           <span class="pr_icon7"></span>Todo</a>
                       </li>
@@ -41,10 +41,11 @@
                         <div class="tab-pane fade show active" id="tab-1" role="tabpanel" aria-labelledby="tab1">
                             <div class="row animation" data-animation="fadeInUp" data-animation-delay="0.05s">
                                 <a href="javascript:void(0);" class="nav-link sidetoggle" >
-                                    <div class="col-xl-3 col-lg-4 col-sm-6 col-xs-6" *ngFor="let tix of tixs" (click)="viewProduct(tix)">
+                                    <div class="col-xl-3 col-lg-4 col-sm-6 col-xs-6" *ngFor="let tix of tixs" [hidden]="!tix.stockStatus && this._uw.filter" (click)="viewProduct(tix)">
                                       <div class="product" >
                                             <div class="product_img">
-                                               <span class="pr_flash_mini bg_green" style="">{{tix.presentacion}}</span>
+                                               <span class="pr_flash_mini bg_green" style="" [hidden]="!tix.stockStatus">Disponible</span>
+                                               <span class="pr_flash_mini bg_red" style="" [hidden]="tix.stockStatus">Agotado</span>
                                                 <a ><img src="{{tix.images[0]}}" alt=""/></a>
                                                 <div class="product_action_box">
                                                     <ul class="list_none pr_action_btn">
@@ -53,7 +54,7 @@
                                                 </div>
                                             </div>
                                             <div class="product_info" *ngIf="this._uw.info[0]">
-                                                 <h6><a class="popup-ajax">{{tix.productName}}</a></h6>
+                                                 <h6><a class="popup-ajax">{{tix.productName}} ({{tix.presentacion}})</a></h6>
                                                <!--  <div class="rating">
                                                     <div class="product_rate" style="width:60%"></div></div> -->
                                                 <span [hidden]="this._uw.currency==this._uw.info[0].colp || this._uw.currency==this._uw.info[0].usd">Bs.S. </span>
@@ -73,10 +74,11 @@
                         <div class="tab-pane fade" id="tab-2" role="tabpanel" aria-labelledby="tab2">
                             <div class="row animation" data-animation="fadeInUp" data-animation-delay="0.05s">
                                 <a href="javascript:void(0);" class="nav-link sidetoggle">
-                                    <div class="col-xl-3 col-lg-4 col-sm-6 col-xs-6" *ngFor="let tix of tixs" [hidden]="tix.category!='Verduras'" (click)="viewProduct(tix)" >
+                                    <div class="col-xl-3 col-lg-4 col-sm-6 col-xs-6" *ngFor="let tix of tixs" [hidden]="tix.category!='Verduras' || !tix.stockStatus && this._uw.filter" (click)="viewProduct(tix)" >
                                         <div class="product">
                                             <div class="product_img">
-                                               <span class="pr_flash_mini bg_green" style="">{{tix.presentacion}}</span>
+                                                <span class="pr_flash_mini bg_green" style="" [hidden]="!tix.stockStatus">Disponible</span>
+                                               <span class="pr_flash_mini bg_red" style="" [hidden]="tix.stockStatus">Agotado</span>
                                                 <a ><img src="{{tix.images[0]}}" alt=""/></a>
                                                 <div class="product_action_box">
                                                     <ul class="list_none pr_action_btn">
@@ -85,7 +87,7 @@
                                                 </div>
                                             </div>
                                             <div class="product_info" *ngIf="this._uw.info[0]">
-                                                 <h6><a class="popup-ajax">{{tix.productName}}</a></h6>
+                                                 <h6><a class="popup-ajax">{{tix.productName}} ({{tix.presentacion}})</a></h6>
                                                <!-- <div class="rating">
                                                     <div class="product_rate" style="width:60%"></div></div> -->
                                                 <span [hidden]="this._uw.currency==this._uw.info[0].colp || this._uw.currency==this._uw.info[0].usd">Bs.S. </span>
@@ -105,10 +107,11 @@
                         <div class="tab-pane fade" id="tab-3" role="tabpanel" aria-labelledby="tab3">
                           <div class="row animation" data-animation="fadeInUp" data-animation-delay="0.05s">
                             <a href="javascript:void(0);" class="nav-link sidetoggle">
-                                    <div class="col-xl-3 col-lg-4 col-sm-6 col-xs-6" *ngFor="let tix of tixs" [hidden]="tix.category!='Frutos'" (click)="viewProduct(tix)">
+                                    <div class="col-xl-3 col-lg-4 col-sm-6 col-xs-6" *ngFor="let tix of tixs" [hidden]="tix.category!='Frutos' || !tix.stockStatus && this._uw.filter" (click)="viewProduct(tix)">
                                        <div class="product">
                                             <div class="product_img">
-                                               <span class="pr_flash_mini bg_green" style="">{{tix.presentacion}}</span>
+                                                <span class="pr_flash_mini bg_green" style="" [hidden]="!tix.stockStatus">Disponible</span>
+                                               <span class="pr_flash_mini bg_red" style="" [hidden]="tix.stockStatus">Agotado</span>
                                                 <a ><img src="{{tix.images[0]}}" alt=""/></a>
                                                 <div class="product_action_box">
                                                     <ul class="list_none pr_action_btn">
@@ -117,7 +120,7 @@
                                                 </div>
                                             </div>
                                             <div class="product_info" *ngIf="this._uw.info[0]">
-                                                 <h6><a class="popup-ajax">{{tix.productName}}</a></h6>
+                                                 <h6><a class="popup-ajax">{{tix.productName}} ({{tix.presentacion}})</a></h6>
                                                <!-- <div class="rating">
                                                     <div class="product_rate" style="width:60%"></div></div> -->
                                                 <span [hidden]="this._uw.currency==this._uw.info[0].colp || this._uw.currency==this._uw.info[0].usd">Bs.S. </span>
@@ -137,10 +140,11 @@
                         <div class="tab-pane fade" id="tab-4" role="tabpanel" aria-labelledby="tab4">
                            <div class="row animation" data-animation="fadeInUp" data-animation-delay="0.05s">
                                 <a href="javascript:void(0);" class="nav-link sidetoggle">
-                                    <div class="col-xl-3 col-lg-4 col-sm-6 col-xs-6" *ngFor="let tix of tixs" [hidden]="tix.category!='Legumbres'"(click)="viewProduct(tix)">
+                                    <div class="col-xl-3 col-lg-4 col-sm-6 col-xs-6" *ngFor="let tix of tixs" [hidden]="tix.category!='Legumbres'|| !tix.stockStatus && this._uw.filter"(click)="viewProduct(tix)">
                                       <div class="product">
                                             <div class="product_img">
-                                               <span class="pr_flash_mini bg_green" style="">{{tix.presentacion}}</span>
+                                               <span class="pr_flash_mini bg_green" style="" [hidden]="!tix.stockStatus">Disponible</span>
+                                               <span class="pr_flash_mini bg_red" style="" [hidden]="tix.stockStatus">Agotado</span>
                                                 <a ><img src="{{tix.images[0]}}" alt=""/></a>
                                                 <div class="product_action_box">
                                                     <ul class="list_none pr_action_btn">
@@ -149,7 +153,7 @@
                                                 </div>
                                             </div>
                                             <div class="product_info" *ngIf="this._uw.info[0]">
-                                                 <h6><a  class="popup-ajax">{{tix.productName}}</a></h6>
+                                                 <h6><a  class="popup-ajax">{{tix.productName}} ({{tix.presentacion}})</a></h6>
                                                <!-- <div class="rating">
                                                     <div class="product_rate" style="width:60%"></div></div> -->
                                                 <span [hidden]="this._uw.currency==this._uw.info[0].colp || this._uw.currency==this._uw.info[0].usd">Bs.S. </span>
@@ -169,10 +173,11 @@
                         <div class="tab-pane fade" id="tab-5" role="tabpanel" aria-labelledby="tab5">
                            <div class="row animation" data-animation="fadeInUp" data-animation-delay="0.05s">
                                 <a href="javascript:void(0);" class="nav-link sidetoggle">
-                                    <div class="col-xl-3 col-lg-4 col-sm-6 col-xs-6" *ngFor="let tix of tixs" [hidden]="tix.category!='Bulbos'"(click)="viewProduct(tix)">
+                                    <div class="col-xl-3 col-lg-4 col-sm-6 col-xs-6" *ngFor="let tix of tixs" [hidden]="tix.category!='Bulbos'|| !tix.stockStatus && this._uw.filter"(click)="viewProduct(tix)">
                                       <div class="product">
                                             <div class="product_img">
-                                               <span class="pr_flash_mini bg_green" style="">{{tix.presentacion}}</span>
+                                               <span class="pr_flash_mini bg_green" style="" [hidden]="!tix.stockStatus">Disponible</span>
+                                               <span class="pr_flash_mini bg_red" style="" [hidden]="tix.stockStatus">Agotado</span>
                                                 <a ><img src="{{tix.images[0]}}" alt=""/></a>
                                                 <div class="product_action_box">
                                                     <ul class="list_none pr_action_btn">
@@ -181,7 +186,7 @@
                                                 </div>
                                             </div>
                                             <div class="product_info" *ngIf="this._uw.info[0]">
-                                                 <h6><a class="popup-ajax">{{tix.productName}}</a></h6>
+                                                 <h6><a class="popup-ajax">{{tix.productName}} ({{tix.presentacion}})</a></h6>
                                                <!-- <div class="rating">
                                                     <div class="product_rate" style="width:60%"></div></div> -->
                                                 <span [hidden]="this._uw.currency==this._uw.info[0].colp || this._uw.currency==this._uw.info[0].usd">Bs.S. </span>
@@ -201,10 +206,11 @@
                         <div class="tab-pane fade" id="tab-6" role="tabpanel" aria-labelledby="tab6">
                            <div class="row animation" data-animation="fadeInUp" data-animation-delay="0.05s">
                                 <a href="javascript:void(0);" class="nav-link sidetoggle">
-                                    <div class="col-xl-3 col-lg-4 col-sm-6 col-xs-6" *ngFor="let tix of tixs" [hidden]="tix.category!='Tubérculos'"(click)="viewProduct(tix)">
+                                    <div class="col-xl-3 col-lg-4 col-sm-6 col-xs-6" *ngFor="let tix of tixs" [hidden]="tix.category!='Tubérculos'|| !tix.stockStatus && this._uw.filter"(click)="viewProduct(tix)">
                                       <div class="product">
                                             <div class="product_img">
-                                               <span class="pr_flash_mini bg_green" style="">{{tix.presentacion}}</span>
+                                               <span class="pr_flash_mini bg_green" style="" [hidden]="!tix.stockStatus">Disponible</span>
+                                               <span class="pr_flash_mini bg_red" style="" [hidden]="tix.stockStatus">Agotado</span>
                                                 <a ><img src="{{tix.images[0]}}" alt=""/></a>
                                                 <div class="product_action_box">
                                                     <ul class="list_none pr_action_btn">
@@ -213,7 +219,7 @@
                                                 </div>
                                             </div>
                                             <div class="product_info" *ngIf="this._uw.info[0]">
-                                                 <h6><a class="popup-ajax">{{tix.productName}}</a></h6>
+                                                 <h6><a class="popup-ajax">{{tix.productName}} ({{tix.presentacion}})</a></h6>
                                                <!-- <div class="rating">
                                                     <div class="product_rate" style="width:60%"></div></div> -->
                                                 <span [hidden]="this._uw.currency==this._uw.info[0].colp || this._uw.currency==this._uw.info[0].usd">Bs.S. </span>
