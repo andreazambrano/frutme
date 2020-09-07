@@ -57,7 +57,7 @@ export class PagoComponent implements OnInit {
   }
 
 // getOrder(){
-//    this.dataApi.getOrderByNpedido().subscribe();
+//    this.dataApiService.getOrderByNpedido().subscribe();
 // }
 
 
@@ -95,7 +95,7 @@ export class PagoComponent implements OnInit {
     console.log("id conseguido: "+this.order.id);
     // console.log.("id order: "+this._uw.orderPro.id);
       this.ngFormSendPago = this.formBuilder.group({
-      // npedido: ["",[Validators.required]]
+      npedido: ["",[Validators.required]]
       });
   }
 
