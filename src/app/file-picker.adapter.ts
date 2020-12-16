@@ -25,8 +25,8 @@ export class DemoFilePickerAdapter extends FilePickerAdapter {
     const form = new FormData();
     form.append('file', fileItem.file);
 
-    const api = 'http://192.168.1.2:3019/api/containers/tixsImages/upload';
-        // const api = 'http://192.168.1.2:3019/api/containers/tixsImages/upload';
+    const api = 'http://3.129.29.75:3015/api/containers/tixsImages/upload';
+        // const api = 'http://3.129.29.75:3015/api/containers/tixsImages/upload';
 
     const req = new HttpRequest('POST', api, form, {reportProgress: true});
     return this.http.request(req)
@@ -36,7 +36,7 @@ export class DemoFilePickerAdapter extends FilePickerAdapter {
          this._uw.file=res.body.result.files.file;
          // console.log("Nombre: ",this._uw.file[0].name);
          // this._uw.images.push('http://192.168.1.2:80/imgApiFruit/server/local-storage/tixsImages/'+this._uw.file[0].name);
-         this._uw.images.push('http://192.168.1.2:80/frutiapi/server/local-storage/tixsImages/'+this._uw.file[0].name);
+         this._uw.images.push('http://3.129.29.75:80/imgFrutme/server/local-storage/tixsImages/'+this._uw.file[0].name);
           return res.body.id.toString();
        
         } else if (res.type ===  HttpEventType.UploadProgress) {
@@ -48,7 +48,7 @@ export class DemoFilePickerAdapter extends FilePickerAdapter {
       );
   }
     public removeFile(fileItem): Observable<any> {
-    const removeApi = 'http://192.168.1.2/api/containers/tixsImages/upload';
+    const removeApi = 'http://3.129.29.75/api/containers/tixsImages/upload';
     return this.http.post(removeApi, {});
     }
 }

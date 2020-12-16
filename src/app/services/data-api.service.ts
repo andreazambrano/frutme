@@ -28,22 +28,22 @@ export class DataApiService {
   		Authorization: this.authService.getToken()
   		});
 	getAllTixs(){
-		const url_api = 'https://db.andesproadventures.com:3025/api/tixes?filter[where][status]=activated';
+		const url_api = 'http://3.129.29.75:3025/api/tixes?filter[where][status]=activated';
 		return this.http.get(url_api);
 	}
 	getInfo(){
-		const url_api=`https://db.andesproadventures.com:3025/api/infos/`;
+		const url_api=`http://3.129.29.75:3025/api/infos/`;
 		this.info = this.http.get(url_api);
 		return (this.info);
 	}
 	saveSale(sale :SaleInterface){
-		const url_api='https://db.andesproadventures.com:3025/api/sale';
+		const url_api='http://3.129.29.75:3025/api/sale';
 		return this.http
 		.post<SaleInterface>(url_api, sale)
 		.pipe(map(data => data));
 	}
 	saveOrder(order :OrderInterface){
-		const url_api='https://db.andesproadventures.com:3025/api/order';
+		const url_api='http://3.129.29.75:3025/api/order';
 		return this.http
 		.post<OrderInterface>(url_api, order)
 		.pipe(map(data => data));
@@ -56,13 +56,13 @@ export class DataApiService {
 	}
 	updateOrder(order :OrderInterface, id: string){
 		// let token = this.authService.getToken();
-		const url_api=`https://db.andesproadventures.com:3025/api/order/${id}`;
+		const url_api=`http://3.129.29.75:3025/api/order/${id}`;
 		return this.http
 		.put<OrderInterface>(url_api, order)
 		.pipe(map(data => data));
 	}
 	getOrderByNpedido(npedido: string){
-		const url_api = `https://db.andesproadventures.com:3025/api/order?filter[where][npedido]=${npedido}`;
+		const url_api = `http://3.129.29.75:3025/api/order?filter[where][npedido]=${npedido}`;
 		this.order = this.http.get(url_api);
 		return (this.order);
 
