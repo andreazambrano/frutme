@@ -28,41 +28,41 @@ export class DataApiService {
   		Authorization: this.authService.getToken()
   		});
 	getAllTixs(){
-		const url_api = 'https://db.andesproadventures.com:3025/api/tixes?filter[where][status]=activated';
+		const url_api = 'https://db.buckapi.com:3025/api/tixes?filter[where][status]=activated';
 		return this.http.get(url_api);
 	}
 	getInfo(){
-		const url_api=`https://db.andesproadventures.com:3025/api/infos/`;
+		const url_api=`https://db.buckapi.com:3025/api/infos/`;
 		this.info = this.http.get(url_api);
 		return (this.info);
 	}
 	saveSale(sale :SaleInterface){
-		const url_api='https://db.andesproadventures.com:3025/api/sale';
+		const url_api='https://db.buckapi.com:3025/api/sale';
 		return this.http
 		.post<SaleInterface>(url_api, sale)
 		.pipe(map(data => data));
 	}
 	saveOrder(order :OrderInterface){
-		const url_api='https://db.andesproadventures.com:3025/api/order';
+		const url_api='https://db.buckapi.com:3025/api/order';
 		return this.http
 		.post<OrderInterface>(url_api, order)
 		.pipe(map(data => data));
 	}
 	sendMailNewBookAppToAdmin(book){
-		const url_api='https://db.andesproadventures.com:3006/newBookAppToAdmin';
+		const url_api='https://db.buckapi.com:3006/newBookAppToAdmin';
 		return this.http
 		.post(url_api, book)
 		.pipe(map(data => data));
 	}
 	updateOrder(order :OrderInterface, id: string){
 		// let token = this.authService.getToken();
-		const url_api=`https://db.andesproadventures.com:3025/api/order/${id}`;
+		const url_api=`https://db.buckapi.com:3025/api/order/${id}`;
 		return this.http
 		.put<OrderInterface>(url_api, order)
 		.pipe(map(data => data));
 	}
 	getOrderByNpedido(npedido: string){
-		const url_api = `https://db.andesproadventures.com:3025/api/order?filter[where][npedido]=${npedido}`;
+		const url_api = `https://db.buckapi.com:3025/api/order?filter[where][npedido]=${npedido}`;
 		this.order = this.http.get(url_api);
 		return (this.order);
 
@@ -72,7 +72,7 @@ export class DataApiService {
 	}
 
 		// let indice = id;
-		// const url_api=`https://db.andesproadventures.com:3018/api/book/${indice}`;
+		// const url_api=`https://db.buckapi.com:3018/api/book/${indice}`;
 		// this.book = this.http.get(url_api);
 		// return (this.book);
 
