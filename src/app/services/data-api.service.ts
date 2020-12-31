@@ -28,22 +28,38 @@ export class DataApiService {
   		Authorization: this.authService.getToken()
   		});
 	getAllTixs(){
+<<<<<<< HEAD
 		const url_api = 'https://db.buckapi.com:3025/api/tixes?filter[where][status]=activated';
 		return this.http.get(url_api);
 	}
 	getInfo(){
 		const url_api=`https://db.buckapi.com:3025/api/infos/`;
+=======
+		const url_api = 'http://3.129.29.75:3025/api/tixes?filter[where][status]=activated';
+		return this.http.get(url_api);
+	}
+	getInfo(){
+		const url_api=`http://3.129.29.75:3025/api/infos/`;
+>>>>>>> c00668777336d336cfff11c286bc5857018420ca
 		this.info = this.http.get(url_api);
 		return (this.info);
 	}
 	saveSale(sale :SaleInterface){
+<<<<<<< HEAD
 		const url_api='https://db.buckapi.com:3025/api/sale';
+=======
+		const url_api='http://3.129.29.75:3025/api/sale';
+>>>>>>> c00668777336d336cfff11c286bc5857018420ca
 		return this.http
 		.post<SaleInterface>(url_api, sale)
 		.pipe(map(data => data));
 	}
 	saveOrder(order :OrderInterface){
+<<<<<<< HEAD
 		const url_api='https://db.buckapi.com:3025/api/order';
+=======
+		const url_api='http://3.129.29.75:3025/api/order';
+>>>>>>> c00668777336d336cfff11c286bc5857018420ca
 		return this.http
 		.post<OrderInterface>(url_api, order)
 		.pipe(map(data => data));
@@ -56,13 +72,21 @@ export class DataApiService {
 	}
 	updateOrder(order :OrderInterface, id: string){
 		// let token = this.authService.getToken();
+<<<<<<< HEAD
 		const url_api=`https://db.buckapi.com:3025/api/order/${id}`;
+=======
+		const url_api=`http://3.129.29.75:3025/api/order/${id}`;
+>>>>>>> c00668777336d336cfff11c286bc5857018420ca
 		return this.http
 		.put<OrderInterface>(url_api, order)
 		.pipe(map(data => data));
 	}
 	getOrderByNpedido(npedido: string){
+<<<<<<< HEAD
 		const url_api = `https://db.buckapi.com:3025/api/order?filter[where][npedido]=${npedido}`;
+=======
+		const url_api = `http://3.129.29.75:3025/api/order?filter[where][npedido]=${npedido}`;
+>>>>>>> c00668777336d336cfff11c286bc5857018420ca
 		this.order = this.http.get(url_api);
 		return (this.order);
 
